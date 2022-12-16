@@ -18,11 +18,26 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from main.views import post_list, create_post, update_post, delete_post, filter_by_user, search, toggle_like
-from reviews.views import CommentViewSet
+from review.views import CommentViewSet
 
 
 router = DefaultRouter()
 router.register('comments', CommentViewSet)
+
+"""===============Swagger docs==============="""
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+swagger_view = get_schema_view(
+    openapi.Info(
+        title="Blog API",
+        default_version="v1",
+        description="blog API"
+    ),
+    public=True
+)
+
+"""========================================="""
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', swagger_view.with_ui('swagger', cache_timeout=0)),

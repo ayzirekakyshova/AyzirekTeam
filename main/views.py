@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from .models import Post
 from .serializers import PostSerializer
-# from reviews.models import LikePost
+from review.models import LikePost
 
 
 User = get_user_model()
@@ -54,19 +54,19 @@ def search(request):
     return Response(serializer.data, status=200)
 
 
-# @api_view(['POST'])
-# def toggle_like(request):
-#     post_id = request.data.get("post")
-#     author_id = request.data.get("author")
-#     post = get_object_or_404(Post, id=post_id)
-#     author = get_object_or_404(User, id=author_id)
+@api_view(['POST'])
+def toggle_like(request):
+    post_id = request.data.get("post")
+    author_id = request.data.get("author")
+    post = get_object_or_404(Post, id=post_id)
+    author = get_object_or_404(User, id=author_id)
 
-#     if LikePost.objects.filter(post=post, author=author).exists():
-#         # если был лайк 
-#         LikePost.objects.filter(post=post, author=author).delete()
-#         # удаляем
-#     else:
-#         # если лайка нет
-#         LikePost.objects.create(post=post, author=author)
-#         # создаем
-#     return Response(status=201)
+    if LikePost.objects.filter(post=post, author=author).exists():
+        # если был лайк 
+        LikePost.objects.filter(post=post, author=author).delete()
+        # удаляем
+    else:
+        # если лайка нет
+        LikePost.objects.create(post=post, author=author)
+        # создаем
+    return Response(status=201)
