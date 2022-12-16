@@ -5,8 +5,6 @@ from rest_framework.response import Response
 
 from .models import Post
 from .serializers import PostSerializer
-
-
 from review.models import LikePost
 
 
