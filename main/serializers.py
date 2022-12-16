@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Post
-from reviews.serializers import CommentSerializer
+from review.serializers import CommentSerializer
 
 class PostSerializer(ModelSerializer):
     class Meta:

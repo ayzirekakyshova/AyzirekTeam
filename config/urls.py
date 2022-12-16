@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from main.views import post_list, create_post, update_post, delete_post, filter_by_user, search, toggle_like
-from reviews.views import CommentViewSet
+from review.views import CommentViewSet
 
 
 router = DefaultRouter()
