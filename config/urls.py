@@ -12,10 +12,27 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+    """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
+from main.views import post_list, create_post, update_post, delete_post, filter_by_user, search, toggle_like
+from reviews.views import CommentViewSet
+
+
+router = DefaultRouter()
+router.register('comments', CommentViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('docs/', swagger_view.with_ui('swagger', cache_timeout=0)),
+    path('posts/', post_list),
+    path('post-create/', create_post), 
+    path('post-update/<int:id>/', update_post),
+    path('post-delete/<int:id>/', delete_post),
+    path('post-filter/<int:u_id>/', filter_by_user),
+    path('post-search/', search),
+    path('post-like/', toggle_like),
+    path('', include(router.urls)),
 ]
+
